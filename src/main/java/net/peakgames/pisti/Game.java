@@ -4,7 +4,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Stack;
 
-import net.peakgames.pisti.ArgumentUtil.ArgumentTypes;
+import net.peakgames.pisti.ArgumentUtil.ArgumentType;
 import net.peakgames.pisti.bot.IBot;
 import net.peakgames.pisti.model.impl.Card;
 import net.peakgames.pisti.model.impl.Deck;
@@ -14,14 +14,14 @@ public class Game implements Runnable {
 	private IBot players[] = new IBot[4];
 	private final int adjacentGames;
 
-	public Game(Map<ArgumentTypes, String> arguments) {
+	public Game(Map<ArgumentType, String> arguments) {
 		super();
-		this.adjacentGames = Integer.parseInt(arguments.get(ArgumentTypes.TOTALCOUNT))
-				/ Integer.parseInt(arguments.get(ArgumentTypes.CONCURRENTCOUNT));
-		this.players[0] = ArgumentUtil.getBotInstance(arguments.get(ArgumentTypes.PLAYER2));
-		this.players[1] = ArgumentUtil.getBotInstance(arguments.get(ArgumentTypes.PLAYER3));
-		this.players[2] = ArgumentUtil.getBotInstance(arguments.get(ArgumentTypes.PLAYER4));
-		this.players[3] = ArgumentUtil.getBotInstance(arguments.get(ArgumentTypes.PLAYER1));
+		this.adjacentGames = Integer.parseInt(arguments.get(ArgumentType.TOTALCOUNT))
+				/ Integer.parseInt(arguments.get(ArgumentType.CONCURRENTCOUNT));
+		this.players[0] = ArgumentUtil.getBotInstance(arguments.get(ArgumentType.PLAYER2));
+		this.players[1] = ArgumentUtil.getBotInstance(arguments.get(ArgumentType.PLAYER3));
+		this.players[2] = ArgumentUtil.getBotInstance(arguments.get(ArgumentType.PLAYER4));
+		this.players[3] = ArgumentUtil.getBotInstance(arguments.get(ArgumentType.PLAYER1));
 	}
 
 	@Override

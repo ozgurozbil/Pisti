@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import net.peakgames.pisti.ArgumentUtil.ArgumentTypes;
+import net.peakgames.pisti.ArgumentUtil.ArgumentType;
 import net.peakgames.pisti.exception.ArgumentQuitException;
 
 public class Main {
@@ -18,12 +18,12 @@ public class Main {
 		List<Game> games = new ArrayList<Game>();
 
 		// Inputs are taken.
-		Map<ArgumentTypes, String> arguments = getArguments(args);
+		Map<ArgumentType, String> arguments = getArguments(args);
 		if (arguments == null) {
 			return;
 		}
-		final int concurrentGameCount = Integer.parseInt(arguments.get(ArgumentTypes.CONCURRENTCOUNT));
-		final int totalGameCount = Integer.parseInt(arguments.get(ArgumentTypes.TOTALCOUNT));
+		final int concurrentGameCount = Integer.parseInt(arguments.get(ArgumentType.CONCURRENTCOUNT));
+		final int totalGameCount = Integer.parseInt(arguments.get(ArgumentType.TOTALCOUNT));
 
 		// Game process begins.
 		long start = System.nanoTime();
@@ -55,7 +55,7 @@ public class Main {
 		System.out.println("Simulation Duration: " + (end - start) / 1000000 + "ms");
 	}
 
-	public static Map<ArgumentTypes, String> getArguments(String[] args) {
+	public static Map<ArgumentType, String> getArguments(String[] args) {
 		try {
 			return ArgumentUtil.areArgsCorrect(args);
 		} catch (ArgumentQuitException e) {
@@ -67,7 +67,7 @@ public class Main {
 	}
 
 	public static void runConcurrentGames(int concurrentGameCount, List<Game> games,
-			Map<ArgumentTypes, String> arguments) {
+			Map<ArgumentType, String> arguments) {
 		ExecutorService taskExecutor = Executors.newFixedThreadPool(concurrentGameCount);
 		for (int i = 0; i < concurrentGameCount; i++) {
 			Game game = new Game(arguments);

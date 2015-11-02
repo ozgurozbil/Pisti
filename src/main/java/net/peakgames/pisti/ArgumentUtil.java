@@ -8,7 +8,7 @@ import net.peakgames.pisti.bot.IBot;
 import net.peakgames.pisti.exception.ArgumentQuitException;
 
 public class ArgumentUtil {
-	public enum ArgumentTypes {
+	public enum ArgumentType {
 		CONCURRENTCOUNT, TOTALCOUNT, PLAYER1, PLAYER2, PLAYER3, PLAYER4;
 	}
 
@@ -22,8 +22,8 @@ public class ArgumentUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public static Map<ArgumentTypes, String> areArgsCorrect(String args[]) throws Exception {
-		Map<ArgumentTypes, String> properArguments = new Hashtable<ArgumentTypes, String>();
+	public static Map<ArgumentType, String> areArgsCorrect(String args[]) throws Exception {
+		Map<ArgumentType, String> properArguments = new Hashtable<ArgumentType, String>();
 		Scanner scanner = new Scanner(System.in);
 		try {
 			// Arguments count control
@@ -35,17 +35,17 @@ public class ArgumentUtil {
 				}
 			}
 			// Concurrent game count argument control
-			properArguments.put(ArgumentTypes.CONCURRENTCOUNT, getProperConcurrentCountArgument(scanner, args[0]));
+			properArguments.put(ArgumentType.CONCURRENTCOUNT, getProperConcurrentCountArgument(scanner, args[0]));
 			// Total game count argument control
-			properArguments.put(ArgumentTypes.TOTALCOUNT, getProperTotalCountArgument(scanner, args[1]));
+			properArguments.put(ArgumentType.TOTALCOUNT, getProperTotalCountArgument(scanner, args[1]));
 			// First player bot control
-			properArguments.put(ArgumentTypes.PLAYER1, getProperPlayerArgument(scanner, args[2]));
+			properArguments.put(ArgumentType.PLAYER1, getProperPlayerArgument(scanner, args[2], ArgumentType.PLAYER1));
 			// Second player bot control
-			properArguments.put(ArgumentTypes.PLAYER2, getProperPlayerArgument(scanner, args[3]));
+			properArguments.put(ArgumentType.PLAYER2, getProperPlayerArgument(scanner, args[3], ArgumentType.PLAYER2));
 			// Third player bot control
-			properArguments.put(ArgumentTypes.PLAYER3, getProperPlayerArgument(scanner, args[4]));
+			properArguments.put(ArgumentType.PLAYER3, getProperPlayerArgument(scanner, args[4], ArgumentType.PLAYER3));
 			// Fourth player bot control
-			properArguments.put(ArgumentTypes.PLAYER4, getProperPlayerArgument(scanner, args[5]));
+			properArguments.put(ArgumentType.PLAYER4, getProperPlayerArgument(scanner, args[5], ArgumentType.PLAYER4));
 			
 		} catch (ArgumentQuitException e) {
 			// Throws ArgumentQuitException to end the operation in the main
@@ -60,14 +60,15 @@ public class ArgumentUtil {
 		return properArguments;
 	}
 	
-	private static String getProperPlayerArgument(Scanner scanner, String argument) throws ArgumentQuitException {
+	private static String getProperPlayerArgument(Scanner scanner, String argument, ArgumentType type) throws ArgumentQuitException {
 		String playerBot = argument;
 		while (!playerBotExistenceControl(playerBot)) {
-			System.err.println("First player bot name is incorrect. Please enter again: ");
+			System.err.println(type + " player bot name is incorrect. Please enter again: ");
 			playerBot = scanner.nextLine().trim();
 			if (playerBot.equals(ARGUMENTS_COMMAND_QUIT)) {
 				throw new ArgumentQuitException();
 			}
+			argument = playerBot;
 		}
 		return playerBot;
 	}
