@@ -1,0 +1,11 @@
+ Argument inputing format:
+ Spaces are the separators between the arguments. 
+ Application validates and requests the incorrect argument again until correct parameter is entered or 'Q' is typed.
+ 10000 100 net.peakgames.pisti.DummyBot net.peakgames.pisti.DummyBot net.peakgames.pisti.SmartBot net.peakgames.pisti.DummyBot
+ 
+ 
+ Numeric values of Cards:
+ 1 - 13 = (ace = 1, 2 = 2, .... , 10 = 10, J = 11, Q = 12, K = 13) HEARTS
+ 14 - 26 = (ace = 14, 2 = 15, .... , 10 = 23, J = 24, Q = 25, K = 26) DIAMONDS
+ 27 - 39 = (ace = 27, 2 = 28, .... , 10 = 36, J = 37, Q = 38, K = 39) CLUBS
+ 40 - 52 = (ace = 40, 2 = 41, .... , 10 = 49, J = 50, Q = 51, K = 52) SPADES
