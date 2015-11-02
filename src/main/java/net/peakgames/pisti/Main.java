@@ -78,7 +78,7 @@ public class Main {
 		try {
 			taskExecutor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 		} catch (InterruptedException e) {
-			System.out.println("patlıyor");
+			System.out.println("An error occured. Thread couldn't safely ended.");
 		}
 	}
 }
